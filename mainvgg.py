@@ -79,32 +79,16 @@ opt = keras.optimizers.RMSprop(learning_rate=learn, decay=1e-6)
 model.compile(loss='categorical_crossentropy',
               optimizer=opt,
               metrics=['accuracy'])
-
 history = model.fit(x_train, y_train,
               batch_size=batch_size,
               epochs=ep,
               validation_data=(x_test, y_test),
               shuffle=True)
-
-
 plt.gca().xaxis.set_major_locator(MaxNLocator(integer=True))
-
 plt.plot(history.history['accuracy'])
 plt.plot(history.history['val_accuracy'])
 plt.title('acc')
 plt.ylabel('Accuracy')
 plt.xlabel('Epoch')
 plt.legend(['Train', 'Test'], loc='lower right')
-plt.show()
-
-
-
-
-# 绘制训练 & 验证的损失值
-plt.plot(history.history['loss'])
-plt.plot(history.history['val_loss'])
-plt.title('Model loss')
-plt.ylabel('Loss')
-plt.xlabel('Epoch')
-plt.legend(['Train', 'Test'], loc='upper right')
 plt.show()
