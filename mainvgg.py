@@ -17,7 +17,22 @@ ep=80
 
 
 
+
+
+
 (x_train, y_train), (x_test, y_test) = cifar100.load_data()
+y_train = tf.squeeze(y_train,axis=1) 
+(x_new,y_new) = (x_train,y_train)
+for i in range(0,100):
+    xx_image=tf.image.random_flip_left_right(x_train[i])
+    xx_image=tf.image.random_brightness(xx_image, max_delta=0.7)
+    xx_image=tf.image.random_contrast(xx_image, lower=0.2, upper=1.8)
+    x_new=np.insert(x_new,0,xx_image,axis=0)
+    y_new=np.insert(y_new,0,y_train[i],axis=0)
+print('---------------------------------------------------------')  
+(x_train,y_train) = (x_new,y_new)
+
+
 y_train = keras.utils.to_categorical(y_train, num_classes)
 y_test = keras.utils.to_categorical(y_test, num_classes)
 x_train = x_train.astype('float32')
